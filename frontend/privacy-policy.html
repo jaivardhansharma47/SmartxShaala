@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - SmartxShaala Private Limited</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .policy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .policy-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .policy-header .last-updated {
+            color: var(--text-color);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .policy-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .policy-section {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .policy-section h2 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .policy-section h2:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .policy-section h3 {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .policy-section h3:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .policy-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Box List Styles */
+        .box-list {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .box-item {
+            background: var(--light-color);
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .box-item:hover::before {
+            left: 100%;
+        }
+
+        .box-item:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+            border-left-width: 6px;
+            background: white;
+        }
+
+        .box-item strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .box-item-text {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .box-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .box-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .policy-section strong {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-home a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .back-home a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .back-home a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            transition: transform 0.6s ease;
+        }
+
+        .highlight-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .highlight-box:hover::after {
+            transform: translate(25%, 25%);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in-item {
+            animation: slideInLeft 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .policy-content {
+                padding: 1.5rem;
+            }
+
+            .policy-header h1 {
+                font-size: 2rem;
+            }
+
+            .policy-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .box-item:hover {
+                transform: translateX(5px) scale(1.01);
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>SmartxShaala</h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="./index.html#home" class="nav-link">Home</a></li>
+                <li><a href="./index.html#about" class="nav-link">About Us</a></li>
+                <li><a href="./index.html#services" class="nav-link">Services</a></li>
+                <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="SmartxShaala Logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="./index.html" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#careers" class="nav-link">Careers</a></li>
+                <li><a href="#founders" class="nav-link">Founders</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy Content -->
+    <div class="policy-container">
+        <div class="policy-header">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated"><i class="far fa-calendar-alt"></i> Last Updated: January 6, 2026</p>
+        </div>
+
+        <div class="policy-content">
+            <div class="highlight-box">
+                <p><strong>Your privacy is important to us.</strong> This Privacy Policy explains how SmartxShaala Private Limited collects, uses, and protects your personal information when you use our services.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to SmartxShaala Private Limited ("SmartxShaala," "we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy applies to all information collected through our website, mobile applications, and related services (collectively, the "Services").</p>
+                <p>By using our Services, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>2. Information We Collect</h2>
+
+                <h3>2.1 Personal Information</h3>
+                <p>We may collect the following types of personal information:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-address-card"></i>
+                        <strong>Contact Information</strong>
+                        <div class="box-item-text">Name, email address, phone number, and mailing address</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-circle"></i>
+                        <strong>Account Information</strong>
+                        <div class="box-item-text">Username, password, and profile information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <strong>Educational Information</strong>
+                        <div class="box-item-text">School name, grade level, courses, academic performance data</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-credit-card"></i>
+                        <strong>Payment Information</strong>
+                        <div class="box-item-text">Billing address, payment method details (processed securely through third-party payment processors)</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-comments"></i>
+                        <strong>Communication Data</strong>
+                        <div class="box-item-text">Messages, feedback, and support requests</div>
+                    </div>
+                </div>
+
+                <h3>2.2 Automatically Collected Information</h3>
+                <p>When you use our Services, we automatically collect certain information:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-laptop"></i>
+                        <strong>Device Information</strong>
+                        <div class="box-item-text">IP address, browser type, device type, operating system</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-chart-line"></i>
+                        <strong>Usage Data</strong>
+                        <div class="box-item-text">Pages visited, time spent on pages, links clicked, features used</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-cookie-bite"></i>
+                        <strong>Cookies and Tracking Technologies</strong>
+                        <div class="box-item-text">We use cookies and similar technologies to enhance user experience</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <strong>Location Data</strong>
+                        <div class="box-item-text">Approximate location based on IP address (with your consent)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>3. How We Use Your Information</h2>
+                <p>We use the collected information for various purposes:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-cogs"></i>
+                        <strong>Service Provision</strong>
+                        <div class="box-item-text">To provide, maintain, and improve our Services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-plus"></i>
+                        <strong>Account Management</strong>
+                        <div class="box-item-text">To create and manage user accounts</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <strong>Transaction Processing</strong>
+                        <div class="box-item-text">To process transactions and send related information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-palette"></i>
+                        <strong>Personalization</strong>
+                        <div class="box-item-text">To personalize user experience and deliver customized content</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-envelope"></i>
+                        <strong>Communication</strong>
+                        <div class="box-item-text">To communicate with you, including sending updates and notifications</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-headset"></i>
+                        <strong>Customer Support</strong>
+                        <div class="box-item-text">To provide customer support and respond to inquiries</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-analytics"></i>
+                        <strong>Analytics</strong>
+                        <div class="box-item-text">To monitor and analyze usage patterns and trends</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Security</strong>
+                        <div class="box-item-text">To detect, prevent, and address technical issues and security threats</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-gavel"></i>
+                        <strong>Legal Compliance</strong>
+                        <div class="box-item-text">To comply with legal obligations and enforce our terms</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <strong>Marketing</strong>
+                        <div class="box-item-text">To send marketing communications (with your consent)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>4. How We Share Your Information</h2>
+                <p>We may share your information in the following circumstances:</p>
+
+                <h3>4.1 Service Providers</h3>
+                <p>We may share information with third-party vendors and service providers who perform services on our behalf:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-cloud"></i>
+                        <strong>Cloud Hosting</strong>
+                        <div class="box-item-text">Cloud hosting and data storage providers</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <strong>Payment Processors</strong>
+                        <div class="box-item-text">Secure payment processing services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <strong>Analytics Services</strong>
+                        <div class="box-item-text">Analytics and performance monitoring services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-life-ring"></i>
+                        <strong>Support Tools</strong>
+                        <div class="box-item-text">Customer support and communication tools</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-paper-plane"></i>
+                        <strong>Email Services</strong>
+                        <div class="box-item-text">Email delivery and notification services</div>
+                    </div>
+                </div>
+
+                <h3>4.2 Educational Institutions</h3>
+                <div class="box-item fade-in-item">
+                    <i class="fas fa-school"></i>
+                    <strong>Institutional Sharing</strong>
+                    <div class="box-item-text">If you access our Services through an educational institution, we may share relevant information with that institution as necessary to provide the Services</div>
+                </div>
+
+                <h3>4.3 Other Circumstances</h3>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <strong>Legal Requirements</strong>
+                        <div class="box-item-text">We may disclose your information if required by law or in response to valid legal requests</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-handshake"></i>
+                        <strong>Business Transfers</strong>
+                        <div class="box-item-text">In the event of a merger, acquisition, or sale of assets, your information may be transferred</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>With Your Consent</strong>
+                        <div class="box-item-text">We may share your information with third parties when you have given us explicit consent</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>5. Data Security</h2>
+                <p>We implement appropriate technical and organizational security measures to protect your personal information:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-lock"></i>
+                        <strong>Encryption</strong>
+                        <div class="box-item-text">Encryption of data in transit and at rest</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-search"></i>
+                        <strong>Security Audits</strong>
+                        <div class="box-item-text">Regular security assessments and audits</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-key"></i>
+                        <strong>Access Controls</strong>
+                        <div class="box-item-text">Access controls and authentication mechanisms</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-database"></i>
+                        <strong>Secure Storage</strong>
+                        <div class="box-item-text">Secure data storage and backup systems</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-shield"></i>
+                        <strong>Employee Training</strong>
+                        <div class="box-item-text">Employee training on data protection best practices</div>
+                    </div>
+                </div>
+                <p>However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>6. Data Retention</h2>
+                <div class="box-item fade-in-item">
+                    <i class="fas fa-hourglass-half"></i>
+                    <strong>Retention Policy</strong>
+                    <div class="box-item-text">We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When information is no longer needed, we will securely delete or anonymize it.</div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>7. Your Rights and Choices</h2>
+                <p>You have certain rights regarding your personal information:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-eye"></i>
+                        <strong>Access</strong>
+                        <div class="box-item-text">Request access to the personal information we hold about you</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-edit"></i>
+                        <strong>Correction</strong>
+                        <div class="box-item-text">Request correction of inaccurate or incomplete information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-trash-alt"></i>
+                        <strong>Deletion</strong>
+                        <div class="box-item-text">Request deletion of your personal information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-ban"></i>
+                        <strong>Opt-out</strong>
+                        <div class="box-item-text">Unsubscribe from marketing communications</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-download"></i>
+                        <strong>Data Portability</strong>
+                        <div class="box-item-text">Request a copy of your data in a portable format</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Objection</strong>
+                        <div class="box-item-text">Object to certain processing of your information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-undo"></i>
+                        <strong>Withdraw Consent</strong>
+                        <div class="box-item-text">Withdraw consent where we rely on consent to process your data</div>
+                    </div>
+                </div>
+                <p>To exercise these rights, please contact us at <strong>privacy@smartxshaala.com</strong></p>
+            </div>
+
+            <div class="policy-section">
+                <h2>8. Children's Privacy</h2>
+                <p>Our Services may be used by children under the age of 18 in an educational context. We take special care to protect children's privacy:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-child"></i>
+                        <strong>Minimum Data Collection</strong>
+                        <div class="box-item-text">We collect only the minimum information necessary to provide educational services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-users"></i>
+                        <strong>Parental Consent</strong>
+                        <div class="box-item-text">We require parental or institutional consent before collecting information from children</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-lock"></i>
+                        <strong>Parental Rights</strong>
+                        <div class="box-item-text">Parents and guardians have the right to review, modify, or delete their child's information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-eye-slash"></i>
+                        <strong>Privacy Protection</strong>
+                        <div class="box-item-text">We do not knowingly allow children to publicly disclose personal information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-times-circle"></i>
+                        <strong>No Marketing to Children</strong>
+                        <div class="box-item-text">We do not use children's information for marketing purposes</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>9. Cookies and Tracking Technologies</h2>
+                <p>We use cookies and similar tracking technologies to improve your experience:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-check-double"></i>
+                        <strong>Essential Cookies</strong>
+                        <div class="box-item-text">Necessary for the operation of our Services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-chart-pie"></i>
+                        <strong>Analytics Cookies</strong>
+                        <div class="box-item-text">Help us understand how users interact with our Services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-sliders-h"></i>
+                        <strong>Functional Cookies</strong>
+                        <div class="box-item-text">Remember your preferences and settings</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-ad"></i>
+                        <strong>Marketing Cookies</strong>
+                        <div class="box-item-text">Used to deliver relevant advertisements (with consent)</div>
+                    </div>
+                </div>
+                <p>You can control cookie preferences through your browser settings. Note that disabling certain cookies may affect functionality.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>10. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-globe"></i>
+                        <strong>Website Updates</strong>
+                        <div class="box-item-text">Posting the updated policy on our website</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <strong>Date Updates</strong>
+                        <div class="box-item-text">Updating the "Last Updated" date</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-bell"></i>
+                        <strong>Email Notifications</strong>
+                        <div class="box-item-text">Sending email notifications for significant changes</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>11. Contact Us</h2>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
+                <div class="highlight-box">
+                    <p><strong>SmartxShaala Private Limited</strong></p>
+                    <p><i class="fas fa-envelope"></i> Email: privacy@smartxshaala.com</p>
+                    <p><i class="fas fa-envelope"></i> General Inquiries: info@smartxshaala.com</p>
+                    <p><i class="fas fa-phone"></i> Phone: +91 XXXXX XXXXX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address: Haryana, India</p>
+                </div>
+            </div>
+
+            <div class="back-home">
+                <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SmartxShaala</h3>
+                    <p>Transforming education through innovative technology solutions. Join us in our mission to make quality education accessible to everyone.</p>
+                    <div class="social-links">
+                        <a href="https://x.com/SmartxShaala"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/smartxshaala/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/smartxshaala?igsh=ZWloaW55bXdqZ3Bx"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./index.html">About Us</a></li>
+                        <li><a href="./index.html">Services</a></li>
+                        <li><a href="./index.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="./index.html">FAQ</a></li>
+                        <li><a href="./index.html">Contact</a></li>
+                        <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="./terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates and insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SmartxShaala Private Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Animate boxes on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animationDelay = `${index * 0.1}s`;
+                        entry.target.classList.add('fade-in-item');
+                    }, index * 50);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.box-item').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+</body>
+</html>

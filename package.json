@@ -1,8 +1,11 @@
 {
   "name": "smartxshaala",
   "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
   "scripts": {
-    "build": "echo 'No build required'"
+    "build": "echo \"No build required\"",
+    "start": "node netlify/functions/server.js"
   },
   "dependencies": {
     "busboy": "^1.6.0",
@@ -10,6 +13,6 @@
     "serverless-http": "^3.2.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   }
 }

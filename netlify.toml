@@ -1,16 +1,16 @@
 [build]
   functions = "netlify/functions"
-  publish   = "."
+  publish = "."
 
-# All API requests go to the Express function
+# API → Netlify Function (Express)
 [[redirects]]
-  from   = "/api/*"
-  to     = "/.netlify/functions/server/:splat"
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
   status = 200
-  force  = true
+  force = true
 
-# SPA / static fallback
+# SPA fallback (must be LAST)
 [[redirects]]
-  from   = "/*"
-  to     = "/index.html"
+  from = "/*"
+  to = "/index.html"
   status = 200

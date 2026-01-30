@@ -1,191 +1,202 @@
-// 🚀 SmartxShaala Backend - NETLIFY Production Ready (FIXED)
-const express = require('express');
-const serverless = require('serverless-http');
-const busboy = require('busboy');
+// 🚀 SmartxShaala Backend - Netlify Serverless (FINAL FIXED VERSION)
 
+const express = require("express");
+const serverless = require("serverless-http");
+const busboy = require("busboy");
+
+// --------------------------------------------
+// App & Router
+// --------------------------------------------
 const app = express();
 const router = express.Router();
 
-// ============================================
-// 1. MIDDLEWARE (Netlify Compatible)
-// ============================================
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// --------------------------------------------
+// Middleware (Netlify Compatible)
+// --------------------------------------------
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// ============================================
-// 2. TELEGRAM HELPER FUNCTION
-// ============================================
+// --------------------------------------------
+// Telegram Helper
+// --------------------------------------------
 async function sendTelegram(token, chatId, message) {
-    try {
-        const payload = { 
-            chat_id: chatId, 
-            text: message,
-            parse_mode: 'HTML'
-        };
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "HTML",
+        }),
+      }
+    );
 
-        const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-        console.log('✅ Telegram:', result.ok ? 'SUCCESS' : result.description);
-        return result;
-    } catch (error) {
-        console.error('❌ Telegram error:', error.message);
-        return { ok: false };
-    }
+    return await response.json();
+  } catch (err) {
+    console.error("Telegram Error:", err.message);
+    return { ok: false };
+  }
 }
 
-// ============================================
-// 3. API ROUTES (All Working!)
-// ============================================
-
+// --------------------------------------------
 // Health Check
-router.get('/health', (req, res) => {
-    res.json({ 
-        status: 'OK', 
-        timestamp: new Date().toISOString(),
-        environment: 'netlify-production',
-        platform: 'Netlify Functions',
-        bots: {
-            contact: process.env.CONTACT_BOT_TOKEN ? '✅ Configured' : '❌ Missing',
-            careers: process.env.CAREERS_BOT_TOKEN ? '✅ Configured' : '❌ Missing',
-            newsletter: process.env.NEWSLETTER_BOT_TOKEN ? '✅ Configured' : '❌ Missing'
-        }
-    });
+// --------------------------------------------
+router.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    platform: "Netlify Functions",
+    timestamp: new Date().toISOString(),
+  });
 });
 
-// Debug
-router.get('/debug', (req, res) => {
-    res.json({
-        nodeVersion: process.version,
-        platform: process.platform,
-        telegram: {
-            contactBot: process.env.CONTACT_BOT_TOKEN ? '✅ OK' : '❌ MISSING',
-            careersBot: process.env.CAREERS_BOT_TOKEN ? '✅ OK' : '❌ MISSING',
-            newsletterBot: process.env.NEWSLETTER_BOT_TOKEN ? '✅ OK' : '❌ MISSING',
-            chatId: process.env.TELEGRAM_CHAT_ID ? '✅ OK' : '❌ MISSING'
-        }
-    });
+// --------------------------------------------
+// Contact API
+// --------------------------------------------
+router.post("/contact", async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing fields" });
+    }
+
+    const text = `🔔 <b>NEW CONTACT</b>
+
+👤 Name: ${name}
+📧 Email: ${email}
+📋 Subject: ${subject || "N/A"}
+💬 Message: ${message}
+
+⏰ ${new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    })}`;
+
+    await sendTelegram(
+      process.env.CONTACT_BOT_TOKEN,
+      process.env.TELEGRAM_CHAT_ID,
+      text
+    );
+
+    res.json({ success: true, message: "Message sent successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 });
 
-// 🔔 CONTACT FORM API
-router.post('/contact', async (req, res) => {
+// --------------------------------------------
+// Newsletter API
+// --------------------------------------------
+router.post("/newsletter", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email required" });
+    }
+
+    const text = `📧 <b>NEW NEWSLETTER</b>
+
+✉️ Email: ${email}
+⏰ ${new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    })}`;
+
+    await sendTelegram(
+      process.env.NEWSLETTER_BOT_TOKEN,
+      process.env.TELEGRAM_CHAT_ID,
+      text
+    );
+
+    res.json({ success: true, message: "Subscribed successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// --------------------------------------------
+// Careers API (Resume Upload)
+// --------------------------------------------
+router.post("/careers", (req, res) => {
+  const bb = busboy({ headers: req.headers });
+  let fields = {};
+  let fileBuffer = null;
+  let fileName = "";
+
+  bb.on("field", (name, value) => {
+    fields[name] = value;
+  });
+
+  bb.on("file", (name, file, info) => {
+    fileName = info.filename;
+    const chunks = [];
+
+    file.on("data", (d) => chunks.push(d));
+    file.on("end", () => {
+      fileBuffer = Buffer.concat(chunks);
+    });
+  });
+
+  bb.on("finish", async () => {
     try {
-        const { name, email, subject, message } = req.body;
-        
-        if (!name || !email || !message) {
-            return res.status(400).json({ success: false, message: 'Name, email, message required' });
-        }
+      const text = `🎯 <b>NEW JOB APPLICATION</b>
 
-        const telegramMsg = `🔔 <b>NEW CONTACT FORM</b>\n\n<b>🏢 SmartxShaala Pvt Ltd</b>\n═══════════════════════════════\n👤 <b>Name:</b> ${name}\n📧 <b>Email:</b> ${email}\n${subject ? `📋 <b>Subject:</b> ${subject}\n` : ''}💬 <b>Message:</b> ${message}\n\n⏰ <b>${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}</b>`;
+👤 Name: ${fields.fullName || "N/A"}
+📧 Email: ${fields.email || "N/A"}
+📞 Phone: ${fields.phone || "N/A"}
+📋 Position: ${fields.position || "N/A"}
+🎓 Qualification: ${fields.qualification || "N/A"}
+📍 Location: ${fields.location || "N/A"}
+📎 Resume: ${fileName || "Not uploaded"}
 
-        await sendTelegram(process.env.CONTACT_BOT_TOKEN, process.env.TELEGRAM_CHAT_ID, telegramMsg);
-        res.json({ success: true, message: 'Message sent successfully!' });
-    } catch (error) {
-        console.error('Contact API error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
+⏰ ${new Date().toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+      })}`;
+
+      await sendTelegram(
+        process.env.CAREERS_BOT_TOKEN,
+        process.env.TELEGRAM_CHAT_ID,
+        text
+      );
+
+      // Send resume file
+      if (fileBuffer && fileName) {
+        const form = new FormData();
+        form.append("chat_id", process.env.TELEGRAM_CHAT_ID);
+        form.append("document", new Blob([fileBuffer]), fileName);
+
+        await fetch(
+          `https://api.telegram.org/bot${process.env.CAREERS_BOT_TOKEN}/sendDocument`,
+          { method: "POST", body: form }
+        );
+      }
+
+      res.json({ success: true, message: "Application submitted" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
+  });
+
+  if (req.rawBody) {
+    bb.end(req.rawBody);
+  }
 });
 
-// 📧 NEWSLETTER API
-router.post('/newsletter', async (req, res) => {
-    try {
-        const { email } = req.body;
-        
-        if (!email) {
-            return res.status(400).json({ success: false, message: 'Email required' });
-        }
+// --------------------------------------------
+// Mount Router (IMPORTANT)
+// --------------------------------------------
+app.use("/api", router);
 
-        const telegramMsg = `📧 <b>NEW NEWSLETTER SUBSCRIPTION</b>\n\n<b>🏢 SmartxShaala</b>\n═══════════════════════════════\n✉️ <b>Email:</b> ${email}\n\n⏰ <b>${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}</b>`;
-
-        await sendTelegram(process.env.NEWSLETTER_BOT_TOKEN, process.env.TELEGRAM_CHAT_ID, telegramMsg);
-        res.json({ success: true, message: 'Subscribed successfully!' });
-    } catch (error) {
-        console.error('Newsletter API error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
-});
-
-// 🎯 CAREERS FORM + RESUME UPLOAD (Netlify Compatible)
-router.post('/careers', (req, res) => {
-    const bb = busboy({ headers: req.headers });
-    let formData = {};
-    let fileData = null;
-    let fileName = '';
-
-    bb.on('field', (name, value) => {
-        formData[name] = value;
-    });
-
-    bb.on('file', (name, file, info) => {
-        const { filename, mimeType } = info;
-        fileName = filename;
-        const chunks = [];
-        
-        file.on('data', (chunk) => chunks.push(chunk));
-        file.on('end', () => {
-            fileData = Buffer.concat(chunks);
-        });
-    });
-
-    bb.on('finish', async () => {
-        try {
-            const { position, fullName, email, phone, experience, qualification, location, coverLetter } = formData;
-            
-            const telegramMsg = `🎯 <b>NEW JOB APPLICATION</b>\n\n<b>🏢 SmartxShaala Careers</b>\n═══════════════════════════════\n📋 <b>Position:</b> ${position || 'Not specified'}\n👤 <b>Name:</b> ${fullName || 'N/A'}\n📧 <b>Email:</b> ${email || 'N/A'}\n📞 <b>Phone:</b> ${phone || 'N/A'}\n📊 <b>Experience:</b> ${experience || 'N/A'}\n🎓 <b>Qualification:</b> ${qualification || 'N/A'}\n📍 <b>Location:</b> ${location || 'N/A'}\n${fileName ? `📎 <b>Resume:</b> ${fileName}` : '📎 No resume'}\n\n💼 <b>Cover Letter:</b>\n${coverLetter || 'Not provided'}\n\n⏰ <b>${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}</b>`;
-
-            // Send application details
-            await sendTelegram(process.env.CAREERS_BOT_TOKEN, process.env.TELEGRAM_CHAT_ID, telegramMsg);
-
-            // Send resume file to Telegram
-            if (fileData && fileName) {
-                const formDataTelegram = new FormData();
-                formDataTelegram.append('chat_id', process.env.TELEGRAM_CHAT_ID);
-                formDataTelegram.append('document', new Blob([fileData]), fileName);
-                formDataTelegram.append('caption', `📎 Resume from ${fullName || 'Applicant'}`);
-                formDataTelegram.append('parse_mode', 'HTML');
-                
-                await fetch(`https://api.telegram.org/bot${process.env.CAREERS_BOT_TOKEN}/sendDocument`, {
-                    method: 'POST',
-                    body: formDataTelegram
-                });
-            }
-
-            res.json({ success: true, message: 'Application submitted!', resumeUploaded: !!fileData });
-        } catch (error) {
-            console.error('Careers API error:', error);
-            res.status(500).json({ success: false, message: 'Server error' });
-        }
-    });
-
-    // Pipe request to busboy
-    if (req.rawBody) {
-        bb.end(req.rawBody);
-    }
-});
-
-// ============================================
-// 4. ROUTER SETUP (Fixed for Netlify)
-// ============================================
-app.use('/api', router);
-
-// ============================================
-// 5. Netlify Function Export
-// ============================================
+// --------------------------------------------
+// Netlify Export (ONLY ONCE)
+// --------------------------------------------
 module.exports.handler = serverless(app);
-
-const express = require('express');
-const serverless = require('serverless-http');
-const busboy = require('busboy');
-
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// ... your routes defined as router.get('/health'), router.post('/contact'), etc.
-
-app.use('/', router);      // ✅ mount router at root
-
-module.exports.handler = serverless(app);   // ✅ ONLY export handler

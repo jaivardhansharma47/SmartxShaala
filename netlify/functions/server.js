@@ -1,4 +1,4 @@
-// 🚀 SmartxShaala Backend - Netlify Serverless (FINAL FIXED VERSION)
+// 🚀 SmartxShaala Backend – Netlify Serverless (FINAL STABLE)
 
 const express = require("express");
 const serverless = require("serverless-http");
@@ -11,17 +11,25 @@ const app = express();
 const router = express.Router();
 
 // --------------------------------------------
-// Middleware (Netlify Compatible)
+// Conditional Body Parsers (IMPORTANT)
+// Prevent multipart uploads from breaking
 // --------------------------------------------
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use((req, res, next) => {
+  if (req.path === "/api/careers") return next();
+  express.json({ limit: "10mb" })(req, res, next);
+});
+
+app.use((req, res, next) => {
+  if (req.path === "/api/careers") return next();
+  express.urlencoded({ extended: true, limit: "10mb" })(req, res, next);
+});
 
 // --------------------------------------------
 // Telegram Helper
 // --------------------------------------------
 async function sendTelegram(token, chatId, message) {
   try {
-    const response = await fetch(
+    const res = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
       {
         method: "POST",
@@ -33,10 +41,9 @@ async function sendTelegram(token, chatId, message) {
         }),
       }
     );
-
-    return await response.json();
+    return await res.json();
   } catch (err) {
-    console.error("Telegram Error:", err.message);
+    console.error("Telegram error:", err.message);
     return { ok: false };
   }
 }
@@ -48,7 +55,7 @@ router.get("/health", (req, res) => {
   res.json({
     status: "OK",
     platform: "Netlify Functions",
-    timestamp: new Date().toISOString(),
+    time: new Date().toISOString(),
   });
 });
 
@@ -67,10 +74,10 @@ router.post("/contact", async (req, res) => {
 
     const text = `🔔 <b>NEW CONTACT</b>
 
-👤 Name: ${name}
-📧 Email: ${email}
-📋 Subject: ${subject || "N/A"}
-💬 Message: ${message}
+👤 ${name}
+📧 ${email}
+📋 ${subject || "N/A"}
+💬 ${message}
 
 ⏰ ${new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
@@ -82,9 +89,9 @@ router.post("/contact", async (req, res) => {
       text
     );
 
-    res.json({ success: true, message: "Message sent successfully" });
+    res.json({ success: true, message: "Message sent" });
   } catch (err) {
-    console.error(err);
+    console.error("Contact error:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
@@ -96,15 +103,14 @@ router.post("/newsletter", async (req, res) => {
   try {
     const { email } = req.body;
 
-    if (!email) {
+    if (!email)
       return res
         .status(400)
         .json({ success: false, message: "Email required" });
-    }
 
-    const text = `📧 <b>NEW NEWSLETTER</b>
+    const text = `📧 <b>NEWSLETTER SUB</b>
 
-✉️ Email: ${email}
+✉️ ${email}
 ⏰ ${new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
     })}`;
@@ -115,84 +121,90 @@ router.post("/newsletter", async (req, res) => {
       text
     );
 
-    res.json({ success: true, message: "Subscribed successfully" });
+    res.json({ success: true, message: "Subscribed" });
   } catch (err) {
-    console.error(err);
+    console.error("Newsletter error:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
 // --------------------------------------------
-// Careers API (Resume Upload)
+// Careers API (Multipart FIXED)
 // --------------------------------------------
 router.post("/careers", (req, res) => {
-  const bb = busboy({ headers: req.headers });
-  let fields = {};
-  let fileBuffer = null;
-  let fileName = "";
+  try {
+    const bb = busboy({ headers: req.headers });
 
-  bb.on("field", (name, value) => {
-    fields[name] = value;
-  });
+    let fields = {};
+    let fileBuffer = null;
+    let fileName = "";
 
-  bb.on("file", (name, file, info) => {
-    fileName = info.filename;
-    const chunks = [];
-
-    file.on("data", (d) => chunks.push(d));
-    file.on("end", () => {
-      fileBuffer = Buffer.concat(chunks);
+    bb.on("field", (name, value) => {
+      fields[name] = value;
     });
-  });
 
-  bb.on("finish", async () => {
-    try {
-      const text = `🎯 <b>NEW JOB APPLICATION</b>
+    bb.on("file", (name, file, info) => {
+      fileName = info.filename;
+      const chunks = [];
 
-👤 Name: ${fields.fullName || "N/A"}
-📧 Email: ${fields.email || "N/A"}
-📞 Phone: ${fields.phone || "N/A"}
-📋 Position: ${fields.position || "N/A"}
-🎓 Qualification: ${fields.qualification || "N/A"}
-📍 Location: ${fields.location || "N/A"}
-📎 Resume: ${fileName || "Not uploaded"}
+      file.on("data", (d) => chunks.push(d));
+      file.on("end", () => {
+        fileBuffer = Buffer.concat(chunks);
+      });
+    });
+
+    bb.on("finish", async () => {
+      try {
+        const text = `🎯 <b>NEW JOB APPLICATION</b>
+
+👤 ${fields.fullName || "N/A"}
+📧 ${fields.email || "N/A"}
+📞 ${fields.phone || "N/A"}
+📋 ${fields.position || "N/A"}
+🎓 ${fields.qualification || "N/A"}
+📍 ${fields.location || "N/A"}
+📎 ${fileName || "No resume"}
 
 ⏰ ${new Date().toLocaleString("en-IN", {
-        timeZone: "Asia/Kolkata",
-      })}`;
+          timeZone: "Asia/Kolkata",
+        })}`;
 
-      await sendTelegram(
-        process.env.CAREERS_BOT_TOKEN,
-        process.env.TELEGRAM_CHAT_ID,
-        text
-      );
-
-      // Send resume file
-      if (fileBuffer && fileName) {
-        const form = new FormData();
-        form.append("chat_id", process.env.TELEGRAM_CHAT_ID);
-        form.append("document", new Blob([fileBuffer]), fileName);
-
-        await fetch(
-          `https://api.telegram.org/bot${process.env.CAREERS_BOT_TOKEN}/sendDocument`,
-          { method: "POST", body: form }
+        await sendTelegram(
+          process.env.CAREERS_BOT_TOKEN,
+          process.env.TELEGRAM_CHAT_ID,
+          text
         );
+
+        if (fileBuffer && fileName) {
+          const form = new FormData();
+          form.append("chat_id", process.env.TELEGRAM_CHAT_ID);
+          form.append("document", new Blob([fileBuffer]), fileName);
+
+          await fetch(
+            `https://api.telegram.org/bot${process.env.CAREERS_BOT_TOKEN}/sendDocument`,
+            { method: "POST", body: form }
+          );
+        }
+
+        res.json({
+          success: true,
+          message: "Application submitted",
+        });
+      } catch (err) {
+        console.error("Careers finish error:", err);
+        res.status(500).json({ success: false, message: "Server error" });
       }
+    });
 
-      res.json({ success: true, message: "Application submitted" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false, message: "Server error" });
-    }
-  });
-
-  if (req.rawBody) {
-    bb.end(req.rawBody);
+    req.pipe(bb);
+  } catch (err) {
+    console.error("Careers crash:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
 // --------------------------------------------
-// Mount Router (IMPORTANT)
+// Mount Router
 // --------------------------------------------
 app.use("/api", router);
 

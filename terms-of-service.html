@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - SmartxShaala Private Limited</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .policy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .policy-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .policy-header .last-updated {
+            color: var(--text-color);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .policy-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .policy-section {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .policy-section h2 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .policy-section h2:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .policy-section h3 {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .policy-section h3:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .policy-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Box List Styles */
+        .box-list {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .box-item {
+            background: var(--light-color);
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .box-item:hover::before {
+            left: 100%;
+        }
+
+        .box-item:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+            border-left-width: 6px;
+            background: white;
+        }
+
+        .box-item strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .box-item-text {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .box-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .box-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .policy-section strong {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .back-home a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-home a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .back-home a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .back-home a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            transition: transform 0.6s ease;
+        }
+
+        .highlight-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+        }
+
+        .highlight-box:hover::after {
+            transform: translate(25%, 25%);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 193, 7, 0.1) 0%, transparent 70%);
+            transition: transform 0.6s ease;
+        }
+
+        .warning-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);
+        }
+
+        .warning-box:hover::after {
+            transform: translate(25%, 25%);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in-item {
+            animation: slideInLeft 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .policy-content {
+                padding: 1.5rem;
+            }
+
+            .policy-header h1 {
+                font-size: 2rem;
+            }
+
+            .policy-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .box-item:hover {
+                transform: translateX(5px) scale(1.01);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>SmartxShaala</h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="./index.html#home" class="nav-link">Home</a></li>
+                <li><a href="./index.html#about" class="nav-link">About Us</a></li>
+                <li><a href="./index.html#services" class="nav-link">Services</a></li>
+                <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="SmartxShaala Logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="./index.html" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#careers" class="nav-link">Careers</a></li>
+                <li><a href="#founders" class="nav-link">Founders</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Terms of Service Content -->
+    <div class="policy-container">
+        <div class="policy-header">
+            <h1>Terms of Service</h1>
+            <p class="last-updated"><i class="far fa-calendar-alt"></i> Last Updated: January 6, 2026</p>
+        </div>
+
+        <div class="policy-content">
+            <div class="highlight-box">
+                <p><strong>Please read these Terms of Service carefully before using our Services.</strong> By accessing or using SmartxShaala's Services, you agree to be bound by these Terms. If you do not agree to these Terms, do not use our Services.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>1. Acceptance of Terms</h2>
+                <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and SmartxShaala Private Limited ("SmartxShaala," "Company," "we," "our," or "us") regarding your use of our website, mobile applications, and related services (collectively, the "Services").</p>
+                <p>By creating an account, accessing, or using our Services, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>2. Eligibility</h2>
+                <p>To use our Services, you must meet the following eligibility requirements:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <strong>Age Requirement</strong>
+                        <div class="box-item-text">You must be at least 13 years of age, or the minimum age required in your jurisdiction</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-friends"></i>
+                        <strong>Parental Consent</strong>
+                        <div class="box-item-text">If you are under 18, you must have parental or guardian consent</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-school"></i>
+                        <strong>Institutional Authorization</strong>
+                        <div class="box-item-text">Educational institutions must have proper authorization to register students</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-check"></i>
+                        <strong>Accurate Information</strong>
+                        <div class="box-item-text">You must provide accurate and complete registration information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-gavel"></i>
+                        <strong>Legal Compliance</strong>
+                        <div class="box-item-text">You must not be prohibited from using the Services under applicable laws</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>3. User Accounts</h2>
+
+                <h3>3.1 Account Creation</h3>
+                <p>To access certain features of our Services, you must create an account. You agree to:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Accurate Information</strong>
+                        <div class="box-item-text">Provide accurate, current, and complete information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <strong>Update Information</strong>
+                        <div class="box-item-text">Maintain and promptly update your account information</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-lock"></i>
+                        <strong>Account Security</strong>
+                        <div class="box-item-text">Maintain the security of your password and account</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <strong>Report Unauthorized Access</strong>
+                        <div class="box-item-text">Notify us immediately of any unauthorized use of your account</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-shield"></i>
+                        <strong>Account Responsibility</strong>
+                        <div class="box-item-text">Accept responsibility for all activities that occur under your account</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>4. Use of Services</h2>
+
+                <h3>4.1 Acceptable Use</h3>
+                <p>You agree to use our Services only for lawful purposes. You agree NOT to:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-ban"></i>
+                        <strong>Violate Laws</strong>
+                        <div class="box-item-text">Violate any applicable laws, regulations, or third-party rights</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-skull-crossbones"></i>
+                        <strong>Fraudulent Activity</strong>
+                        <div class="box-item-text">Use the Services for any fraudulent or malicious purpose</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-server"></i>
+                        <strong>Interfere with Services</strong>
+                        <div class="box-item-text">Interfere with or disrupt the Services or servers</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-secret"></i>
+                        <strong>Unauthorized Access</strong>
+                        <div class="box-item-text">Attempt to gain unauthorized access to any portion of the Services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-virus"></i>
+                        <strong>Malicious Code</strong>
+                        <div class="box-item-text">Upload or transmit viruses, malware, or harmful code</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-angry"></i>
+                        <strong>Harassment</strong>
+                        <div class="box-item-text">Harass, abuse, or harm other users</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-mask"></i>
+                        <strong>Impersonation</strong>
+                        <div class="box-item-text">Impersonate any person or entity</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-database"></i>
+                        <strong>Data Collection</strong>
+                        <div class="box-item-text">Collect or store personal information about other users</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-robot"></i>
+                        <strong>Automated Systems</strong>
+                        <div class="box-item-text">Use automated systems to access the Services without permission</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-code"></i>
+                        <strong>Reverse Engineering</strong>
+                        <div class="box-item-text">Reverse engineer, decompile, or disassemble any part of the Services</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-copyright"></i>
+                        <strong>Proprietary Notices</strong>
+                        <div class="box-item-text">Remove or modify any proprietary notices or labels</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-clone"></i>
+                        <strong>Competing Products</strong>
+                        <div class="box-item-text">Use the Services to create a competing product or service</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>5. Educational Content and Materials</h2>
+
+                <h3>5.1 User-Generated Content</h3>
+                <p>By submitting User Content, you:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-crown"></i>
+                        <strong>Content Ownership</strong>
+                        <div class="box-item-text">Retain ownership of your User Content</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-handshake"></i>
+                        <strong>License Grant</strong>
+                        <div class="box-item-text">Grant us a worldwide, non-exclusive, royalty-free license to use your content</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-certificate"></i>
+                        <strong>Rights Confirmation</strong>
+                        <div class="box-item-text">Represent that you have all necessary rights to your User Content</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <strong>Content Responsibility</strong>
+                        <div class="box-item-text">Are responsible for the accuracy and legality of your User Content</div>
+                    </div>
+                </div>
+
+                <h3>5.2 Prohibited Content</h3>
+                <p>You may not post User Content that:</p>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Illegal Content</strong>
+                        <div class="box-item-text">Is illegal, harmful, threatening, abusive, or defamatory</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-copyright"></i>
+                        <strong>IP Infringement</strong>
+                        <div class="box-item-text">Infringes on intellectual property rights</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-user-lock"></i>
+                        <strong>Personal Information</strong>
+                        <div class="box-item-text">Contains personal information of others without consent</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-bug"></i>
+                        <strong>Malicious Code</strong>
+                        <div class="box-item-text">Contains viruses or malicious code</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <strong>Spam Content</strong>
+                        <div class="box-item-text">Is spam, advertising, or promotional material (unless authorized)</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-times-circle"></i>
+                        <strong>Inappropriate Content</strong>
+                        <div class="box-item-text">Is sexually explicit or inappropriate for educational settings</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>6. Payment and Subscriptions</h2>
+
+                <h3>6.1 Payment Terms</h3>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-rupee-sign"></i>
+                        <strong>Fees</strong>
+                        <div class="box-item-text">All fees are stated in Indian Rupees (INR) unless otherwise specified</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-redo-alt"></i>
+                        <strong>Auto-Renewal</strong>
+                        <div class="box-item-text">Subscription services will automatically renew unless cancelled</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-undo"></i>
+                        <strong>Refund Policy</strong>
+                        <div class="box-item-text">Refund policies vary by service and will be communicated at purchase</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-tags"></i>
+                        <strong>Price Changes</strong>
+                        <div class="box-item-text">We reserve the right to modify pricing with reasonable notice</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>7. Intellectual Property Rights</h2>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Our Rights</strong>
+                        <div class="box-item-text">All intellectual property in the Services belongs to SmartxShaala or our licensors</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-trademark"></i>
+                        <strong>Trademark Usage</strong>
+                        <div class="box-item-text">These Terms do not grant you rights to use our trademarks or branding</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-file-contract"></i>
+                        <strong>Copyright Protection</strong>
+                        <div class="box-item-text">We respect intellectual property rights and expect users to do the same</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>8. Disclaimers and Limitations</h2>
+
+                <div class="warning-box">
+                    <p><strong><i class="fas fa-exclamation-triangle"></i> IMPORTANT:</strong> Please read this section carefully as it limits our liability to you.</p>
+                </div>
+
+                <h3>8.1 Service Provided "As Is"</h3>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-box-open"></i>
+                        <strong>No Warranties</strong>
+                        <div class="box-item-text">Services provided "as is" without warranties of merchantability or fitness</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Accuracy Disclaimer</strong>
+                        <div class="box-item-text">No guarantees regarding accuracy, reliability, or completeness of content</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-server"></i>
+                        <strong>Availability</strong>
+                        <div class="box-item-text">No guarantee of uninterrupted or error-free operation</div>
+                    </div>
+                </div>
+
+                <h3>8.2 Limitation of Liability</h3>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-ban"></i>
+                        <strong>No Indirect Damages</strong>
+                        <div class="box-item-text">We are not liable for indirect, incidental, or consequential damages</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-chart-line"></i>
+                        <strong>No Profit Loss</strong>
+                        <div class="box-item-text">Not liable for loss of profits, revenue, data, or use</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <strong>Maximum Liability</strong>
+                        <div class="box-item-text">Total liability limited to amount paid in preceding 12 months or INR 10,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>9. Dispute Resolution</h2>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-book"></i>
+                        <strong>Governing Law</strong>
+                        <div class="box-item-text">These Terms are governed by the laws of India</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-landmark"></i>
+                        <strong>Jurisdiction</strong>
+                        <div class="box-item-text">Disputes subject to exclusive jurisdiction of courts in Haryana, India</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-comments"></i>
+                        <strong>Informal Resolution</strong>
+                        <div class="box-item-text">Contact us first to attempt informal resolution before formal dispute</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>10. General Provisions</h2>
+                <div class="box-list">
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-file-contract"></i>
+                        <strong>Entire Agreement</strong>
+                        <div class="box-item-text">These Terms constitute the entire agreement between parties</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <strong>Severability</strong>
+                        <div class="box-item-text">Invalid provisions don't affect remaining terms</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-hand-paper"></i>
+                        <strong>No Waiver</strong>
+                        <div class="box-item-text">Failure to enforce doesn't constitute waiver of rights</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-exchange-alt"></i>
+                        <strong>Assignment</strong>
+                        <div class="box-item-text">We may assign these Terms; you may not without consent</div>
+                    </div>
+                    <div class="box-item fade-in-item">
+                        <i class="fas fa-bolt"></i>
+                        <strong>Force Majeure</strong>
+                        <div class="box-item-text">Not liable for failures due to circumstances beyond control</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>11. Contact Information</h2>
+                <p>If you have any questions regarding these Terms of Service, please contact us:</p>
+                <div class="highlight-box">
+                    <p><strong>SmartxShaala Private Limited</strong></p>
+                    <p><i class="fas fa-envelope"></i> Email: legal@smartxshaala.com</p>
+                    <p><i class="fas fa-envelope"></i> General Inquiries: info@smartxshaala.com</p>
+                    <p><i class="fas fa-phone"></i> Phone: +91 XXXXX XXXXX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address: Haryana, India</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>12. Acknowledgment</h2>
+                <div class="highlight-box">
+                    <p><strong>BY USING OUR SERVICES, YOU ACKNOWLEDGE THAT YOU HAVE READ THESE TERMS OF SERVICE AND AGREE TO BE BOUND BY THEM.</strong></p>
+                </div>
+            </div>
+
+            <div class="back-home">
+                <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SmartxShaala</h3>
+                    <p>Transforming education through innovative technology solutions. Join us in our mission to make quality education accessible to everyone.</p>
+                    <div class="social-links">
+                        <a href="https://x.com/SmartxShaala"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/smartxshaala/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/smartxshaala?igsh=ZWloaW55bXdqZ3Bx"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./index.html">About Us</a></li>
+                        <li><a href="./index.html">Services</a></li>
+                        <li><a href="./index.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="./index.html">FAQ</a></li>
+                        <li><a href="./index.html">Contact</a></li>
+                        <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="#terms of service">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates and insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SmartxShaala Private Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Animate boxes on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animationDelay = `${index * 0.1}s`;
+                        entry.target.classList.add('fade-in-item');
+                    }, index * 50);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.box-item').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+[build]
+  functions = "netlify/functions"
+  publish   = "."
+
+# All API requests go to the Express function
+[[redirects]]
+  from   = "/api/*"
+  to     = "/.netlify/functions/server/:splat"
+  status = 200
+  force  = true
+
+# SPA / static fallback
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
